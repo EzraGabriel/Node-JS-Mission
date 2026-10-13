@@ -7,7 +7,10 @@ CREATE TABLE IF NOT EXISTS users (
     name VARCHAR(100) NOT NULL,
     email VARCHAR(150) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    phone_number VARCHAR(20)
+    phone_number VARCHAR(20),
+    profile_image VARCHAR(255) NULL,
+    verification_token CHAR(36) NULL UNIQUE,
+    email_verified BOOLEAN NOT NULL DEFAULT FALSE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS kategori_kelas (

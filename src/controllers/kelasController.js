@@ -2,7 +2,14 @@ const kelasService = require("../services/kelasService");
 
 const getAllKelas = async (req, res) => {
   try {
-    const data = await kelasService.getAllKelas();
+    const { category, search, sort } = req.query;
+    const allowedSorts = ["price_asc", "price_desc", "title_asc", "title_desc", "rating_desc", "rating_asc"];
+
+    if (sort && !allowedSorts.includes(sort)) {
+      return res.status(400).json({ message: "Urutan kelas tidak valid" });
+    }
+
+    const data = await kelasService.getAllKelas({ category, search, sort });
 
     res.status(200).json({
       message: "Berhasil mengambil semua kelas",
